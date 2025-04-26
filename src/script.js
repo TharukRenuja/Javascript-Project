@@ -69,7 +69,7 @@ function addTransaction(e, descriptionEl, amountEl, categoryEl, dateEl) {
     date,
   };
 
-  transaction.push(newTransaction);
+  transactions.push(newTransaction);
   updateLocalStorage();
 }
 
@@ -423,7 +423,6 @@ function saveCategoriesAndUpdate() {
   renderCategoryList();
 }
 
-// Update all category dropdowns
 function updateCategoryDropdowns(categoryDropdowns) {
   categoryDropdowns.forEach((dropdown) => {
     if (!dropdown) return;
@@ -431,18 +430,14 @@ function updateCategoryDropdowns(categoryDropdowns) {
     const currentValue = dropdown.value;
     dropdown.innerHTML = "";
 
-    // Add all categories
     categories.forEach((category) => {
-      dropdown.insertAdjacentHTML(
-        "beforeend",
-        `<option value="${category.toLowerCase()}">${category}</option>`
-      );
+      const option = document.createElement("option");
+      option.value = category;
+      option.textContent = category;
+      dropdown.appendChild(option);
     });
 
-    if (
-      currentValue &&
-      dropdown.querySelector(`option[value="${currentValue}"]`)
-    ) {
+    if (currentValue && categories.includes(currentValue)) {
       dropdown.value = currentValue;
     }
   });

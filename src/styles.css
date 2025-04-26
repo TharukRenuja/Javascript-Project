@@ -116,6 +116,8 @@ header {
   max-width: 1200px;
   margin: 0 auto;
   /* Bug #23: display should flex */
+  display: flex;
+  flex-direction: row;
   flex-wrap: wrap;
   gap: 20px;
 }
